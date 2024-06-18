@@ -5,6 +5,10 @@ namespace Capital_placement_assessment.Repositories.Implementation
 {
     public class ProfileRepository : IProfileRepository
     {
+        public ProfileRepository()
+        {
+            
+        }
         public Task Create(Profile entity)
         {
             throw new NotImplementedException();

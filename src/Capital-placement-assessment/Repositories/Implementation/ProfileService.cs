@@ -6,6 +6,10 @@ namespace Capital_placement_assessment.Repositories.Implementation
 {
     public class ProfileService : IProfileService
     {
+        public ProfileService()
+        {
+            
+        }
         public Task<bool> CreateProfile(ProfileDTO profileDTO)
         {
             throw new NotImplementedException();
