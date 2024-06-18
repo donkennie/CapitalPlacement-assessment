@@ -1,32 +1,45 @@
 using Capital_placement_assessment.Repositories.Abstraction;
+using Microsoft.Azure.Cosmos;
 using src.Models;
 
 namespace Capital_placement_assessment.Repositories.Implementation
 {
     public class ProfileRepository : IProfileRepository
     {
-        public ProfileRepository()
+        private readonly CosmosClient _cosmosClient;
+        private readonly Container _container;
+        public ProfileRepository(CosmosClient cosmosClient, string databaseId, string containerId)
         {
-            
+            _cosmosClient = cosmosClient;
+            _container = _cosmosClient.GetContainer(databaseId, containerId);
         }
-        public Task Create(Profile entity)
+        public async Task Create(Profile entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Profile> Get(string id)
-        {
-            throw new NotImplementedException();
+            await _container.CreateItemAsync(entity, new PartitionKey(entity.Id));
         }
 
-        public Task<IEnumerable<Profile>> GetAll(string queryString)
+        public async Task<Profile> Get(string id)
         {
-            throw new NotImplementedException();
+            return await _container.ReadItemAsync<Profile>(id, new PartitionKey(id));
         }
 
-        public Task UpdateEntity(Profile entity)
+        public async Task<IEnumerable<Profile>> GetAll(string queryString)
         {
-            throw new NotImplementedException();
+            var query = _container.GetItemQueryIterator<Profile>(new QueryDefinition(queryString));
+            var results = new List<Profile>();
+
+            while (query.HasMoreResults)
+            {
+                var response = await query.ReadNextAsync();
+                results.AddRange(response.ToList());
+            }
+
+            return results;
+        }
+
+        public async Task UpdateEntity(Profile entity)
+        {
+            await _container.ReplaceItemAsync(entity, entity.Id, new PartitionKey(entity.PartitionKey));
         }
     }
 }
