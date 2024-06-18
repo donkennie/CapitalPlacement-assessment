@@ -1,15 +1,15 @@
-﻿namespace Capital_placement_assessment.DTOs
+﻿using System.Text.Json;
+
+namespace Capital_placement_assessment.DTOs
 {
     public class AppException
     {
-        public AppException(int statusCode, string message, string details = null)
-        {
-            StatusCode = statusCode;
-            Message = message;
-            Details = details;
-        }
         public int StatusCode { get; set; }
         public string Message { get; set; }
-        public string Details { get; set; }
+
+        public override string ToString()
+        {
+            return JsonSerializer.Serialize(this);
+        }
     }
 }

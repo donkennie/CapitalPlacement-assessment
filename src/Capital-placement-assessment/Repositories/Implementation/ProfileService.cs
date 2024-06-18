@@ -6,28 +6,52 @@ namespace Capital_placement_assessment.Repositories.Implementation
 {
     public class ProfileService : IProfileService
     {
-        public ProfileService()
+        private readonly IProfileRepository _profileRepository;
+        public ProfileService(IProfileRepository profileRepository) =>
+            _profileRepository = profileRepository;
+
+        public async Task<bool> CreateProfile(ProfileDTO profileDTO)
         {
-            
-        }
-        public Task<bool> CreateProfile(ProfileDTO profileDTO)
-        {
-            throw new NotImplementedException();
+            var profile = new Profile(profileDTO);
+
+            await _profileRepository.Create(profile);
+
+            return true;
         }
 
-        public Task<Profile> GetProfileById(string profileId)
+        public async Task<IEnumerable<Profile>> GetProfiles()
         {
-            throw new NotImplementedException();
+            var queryString = "SELECT * FROM c";
+
+            var profiles = await _profileRepository.GetAll(queryString);
+            return profiles;
         }
 
-        public Task<IEnumerable<Profile>> GetProfiles()
+        public async Task<Profile> GetProfileById(string profileId)
         {
-            throw new NotImplementedException();
+            var profile = await _profileRepository.Get(profileId);
+            return profile;
+        }
+        public async Task<bool> UpdateProfile(string profileId, ProfileDTO profileDto)
+        {
+            var profile = await GetProfileById(profileId);
+            if (profile == null)
+                return false;
+
+            profile.update(profileDto);
+
+            await _profileRepository.UpdateEntity(profile);
+
+            return true;
         }
 
-        public Task<bool> UpdateProfile(string profileId, ProfileDTO profileDto)
+        public async Task<bool> DeleteProfile(string profileId)
         {
-            throw new NotImplementedException();
+            var profileToDelete = await GetProfileById(profileId);
+            if (profileToDelete == null) return false;
+
+             await _profileRepository.Delete(profileToDelete);
+            return true;
         }
     }
 }

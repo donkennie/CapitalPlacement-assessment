@@ -37,7 +37,13 @@ namespace Capital_placement_assessment.Extensions
             serviceCollection.AddSingleton(cosmosClient);
 
 
-
+            serviceCollection.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://example.com");
+                });
+            });
 
         }
     }

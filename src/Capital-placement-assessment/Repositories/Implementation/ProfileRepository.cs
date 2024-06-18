@@ -18,6 +18,12 @@ namespace Capital_placement_assessment.Repositories.Implementation
             await _container.CreateItemAsync(entity, new PartitionKey(entity.Id));
         }
 
+        public async Task<int> Delete(Profile entity)
+        {
+            await _container.DeleteItemAsync<Profile>(entity.Id, new PartitionKey(entity.PartitionKey));
+            return (0);
+        }
+
         public async Task<Profile> Get(string id)
         {
             return await _container.ReadItemAsync<Profile>(id, new PartitionKey(id));

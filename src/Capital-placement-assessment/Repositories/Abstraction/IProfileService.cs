@@ -9,5 +9,6 @@ namespace Capital_placement_assessment.Repositories.Abstraction
         Task<IEnumerable<Profile>> GetProfiles();
         Task<Profile> GetProfileById(string profileId);
         Task<bool> UpdateProfile(string profileId, ProfileDTO profileDto);
+        Task<bool> DeleteProfile(string profileId);
     }
 }
