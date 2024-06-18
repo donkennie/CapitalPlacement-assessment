@@ -1,5 +1,8 @@
 .vs/
+.vs
 git/
+**/obj
+**/bin
 /bin
 /obj
 /Capital-placement-assessment.sln
