@@ -29,6 +29,9 @@ namespace src.Models
         public DateTime? CreatedAt { get; protected set; }
         public DateTime? LastModified { get; protected set; }
 
+        public Profile()
+        {
+        }
         public Profile(ProfileDTO profile)
         {
             Id = Guid.NewGuid().ToString();
@@ -52,9 +55,6 @@ namespace src.Models
             CreatedAt = DateTime.UtcNow;
             LastModified = DateTime.UtcNow;
 
-        }
-        public Profile()
-        {
         }
 
         public void update(ProfileDTO profile)
