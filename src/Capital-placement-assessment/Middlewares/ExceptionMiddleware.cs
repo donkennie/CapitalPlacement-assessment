@@ -44,14 +44,15 @@ namespace Capital_placement_assessment.Middlewares
             var message = exception switch
             {
                 AccessViolationException => "Access violation error from the custom middleware",
+                InputError => "Invalid request",
                 Microsoft.Azure.Cosmos.CosmosException => "Resource not found",
                 _ => "Internal Server Error from the Custom middleware."
             };
 
-            /* if (exception is FluentValidation.ValidationException)
+             if (exception is InputError)
              {
                  context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-             }*/
+             }
 
             if (exception is Microsoft.Azure.Cosmos.CosmosException)
             {

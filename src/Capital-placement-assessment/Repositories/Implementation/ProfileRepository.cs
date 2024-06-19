@@ -45,7 +45,7 @@ namespace Capital_placement_assessment.Repositories.Implementation
 
         public async Task UpdateEntity(Profile entity)
         {
-            await _container.ReplaceItemAsync(entity, entity.Id, new PartitionKey(entity.PartitionKey));
+            await _container.UpsertItemAsync(entity, new PartitionKey(entity.PartitionKey));
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Capital_placement_assessment.Repositories.Implementation
             if (profile == null)
                 return false;
 
-            profile.update(profileDto);
+            profile.Update(profileDto);
 
             await _profileRepository.UpdateEntity(profile);
 

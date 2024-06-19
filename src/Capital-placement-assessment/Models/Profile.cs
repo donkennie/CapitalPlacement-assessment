@@ -1,5 +1,6 @@
 using src.DTOs;
 using Newtonsoft.Json;
+using Capital_placement_assessment.Extensions;
 
 namespace src.Models
 {
@@ -32,50 +33,54 @@ namespace src.Models
         public Profile()
         {
         }
-        public Profile(ProfileDTO profile)
+        public Profile(ProfileDTO profileDto)
         {
+            Validator.CannotBeNullOrEmpty(profileDto.FirstName, profileDto.LastName, profileDto.Email, profileDto.Phone,
+                                profileDto.SelfDescription, profileDto.MultipleChoice, profileDto.YearsOfExperience);
+
             Id = Guid.NewGuid().ToString();
             PartitionKey = Id;
-            FirstName = profile.FirstName;
-            LastName = profile.LastName;
-            Email = profile.Email;
-            Phone = profile.Phone;
-            Nationality = profile.Nationality;
-            CurrectResidence = profile.CurrectResidence;
-            IDNumber = profile.IDNumber;
-            DateOfBirth = profile.DateOfBirth;
-            Gender = profile.Gender;
-            SelfDescription = profile.SelfDescription;
-            YearOfGraduation = profile.YearOfGraduation;
-            Other = profile.Other;
-            MultipleChoice = profile.MultipleChoice;
-            IsRejected = profile.IsRejected;
-            YearsOfExperience = profile.YearsOfExperience;
-            DateMovedToUK = profile.DateMovedToUK;
+            FirstName = profileDto.FirstName;
+            LastName = profileDto.LastName;
+            Email = profileDto.Email;
+            Phone = profileDto.Phone;
+            Nationality = profileDto.Nationality;
+            CurrectResidence = profileDto.CurrectResidence;
+            IDNumber = profileDto.IDNumber;
+            DateOfBirth = profileDto.DateOfBirth;
+            Gender = profileDto.Gender;
+            SelfDescription = profileDto.SelfDescription;
+            YearOfGraduation = profileDto.YearOfGraduation;
+            Other = profileDto.Other;
+            MultipleChoice = profileDto.MultipleChoice;
+            IsRejected = profileDto.IsRejected;
+            YearsOfExperience = profileDto.YearsOfExperience;
+            DateMovedToUK = profileDto.DateMovedToUK;
             CreatedAt = DateTime.UtcNow;
             LastModified = DateTime.UtcNow;
 
         }
 
-        public void update(ProfileDTO profile)
+        public void Update(ProfileDTO profileDto)
         {
-            FirstName = profile.FirstName;
-            LastName = profile.LastName;
-            Email = profile.Email;
-            Phone = profile.Phone;
-            Nationality = profile.Nationality;
-            CurrectResidence = profile.CurrectResidence;
-            IDNumber = profile.IDNumber;
-            DateOfBirth = profile.DateOfBirth;
-            Gender = profile.Gender;
-            SelfDescription = profile.SelfDescription;
-            YearOfGraduation = profile.YearOfGraduation;
-            Other = profile.Other;
-            MultipleChoice = profile.MultipleChoice;
-            IsRejected = profile.IsRejected;
-            YearsOfExperience = profile.YearsOfExperience;
-            DateMovedToUK = profile.DateMovedToUK;
+            FirstName = profileDto.FirstName;
+            LastName = profileDto.LastName;
+            Email = profileDto.Email;
+            Phone = profileDto.Phone;
+            Nationality = profileDto.Nationality;
+            CurrectResidence = profileDto.CurrectResidence;
+            IDNumber = profileDto.IDNumber;
+            DateOfBirth = profileDto.DateOfBirth;
+            Gender = profileDto.Gender;
+            SelfDescription = profileDto.SelfDescription;
+            YearOfGraduation = profileDto.YearOfGraduation;
+            Other = profileDto.Other;
+            MultipleChoice = profileDto.MultipleChoice;
+            IsRejected = profileDto.IsRejected;
+            YearsOfExperience = profileDto.YearsOfExperience;
+            DateMovedToUK = profileDto.DateMovedToUK;
             LastModified = DateTime.UtcNow;
         }
+
     }
 }

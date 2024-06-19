@@ -12,4 +12,9 @@ namespace Capital_placement_assessment.DTOs
             return JsonSerializer.Serialize(this);
         }
     }
+
+    public class InputError : ApplicationException
+    {
+        public InputError(string message = "Invalid input.") : base(message) { }
+    }
 }
