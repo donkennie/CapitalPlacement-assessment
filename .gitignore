@@ -6,4 +6,4 @@ git/
 /bin
 /obj
 /Capital-placement-assessment.sln
-/Capital-placement-assessment/appsettings
+appsettings.json
